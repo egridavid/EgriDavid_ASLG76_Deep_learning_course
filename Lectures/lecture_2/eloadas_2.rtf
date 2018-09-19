@@ -1,0 +1,103 @@
+{\rtf1\ansi\ansicpg1250\cocoartf1561\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww14200\viewh16600\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 \ul \ulc0 2018.09.11 Deeplearning eloadas jegyzet\
+
+\b0 \ulnone \
+Random fel\'edrogat\'e1s:\
+\pard\tx220\tx720\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8226 	}kaggle.com \'97> nagyh\'e1zi t\'e9ma is lehetne\
+{\listtext	\uc0\u8226 	}\'f6ntanul\'f3 h\'e1l\'f3k \'97> nagyh\'e1zi t\'e9ma is lehetne (aktiv\'e1ci\'f3s f\'fcggv\'e9nyekhez)\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+7.dia\
+\
+\'97> az adatokat standardiz\'e1lni kell \'97> norm\'e1l\'e1s v\'e1rhat\'f3 \'e9rt\'e9k \'e9s sz\'f3r\'e1sra pl.\
+	\'97> oka: pl. egys\'e9ges\'edteni kell \'97> kb. egyforma adatok legyenek\
+\
+\'97> a kimenetet pedig normaliz\'e1lni kell \'97> a tartom\'e1nyok ne legyenek olyan v\'e1ltoz\'f3ak\
+	\'97> pl. kicsi \'e9rt\'e9kb\uc0\u337 l nagy kell \'97> instabilit\'e1si probl\'e9m\'e1k\
+\
+9.dia\
+\
+\'97> Nem az agynak a modellje a neuron h\'e1l\'f3!\
+\
+\'97> Nem line\'e1ris f\'fcggv\'e9nyt haszn\'e1lunk \'97> aktiv\'e1ci\'f3s f\'fcggv\'e9ny \
+\
+10.dia\
+\
+\'97> a backprobagation neur h\'e1l\'f3 p\'e9ld\'e1ja ezen a di\'e1n van\
+\
+\'97> W:\
+	\'97> fels\uc0\u337  index: hanyas r\'e9teg\
+	\'97> als\'f3 index: melyik neuronb\'f3l melyikbe\
+\
+// El\uc0\u337 sz\'f6r el\u337 re terjed\'e9st n\'e9zz\'fck meg \'97> bementb\u337 l, hogyan lesz kimenet\
+// sor: axis=0, oszlop: axis=1 \'97> numpy, matek konvenci\'f3\
+// inference \'97> \'93h\'e1l\'f3 futtat\'e1sa\'94 \'97> betan\'edtott h\'e1l\'f3 haszn\'e1lata\
+\
+14. dia\
+\
+\'97> cost, error, loss function \'97> halo hib\'e1j\'e1nak m\'e9rt\'e9ke\
+\
+\'97> a di\'e1n \'97> regresszi\'f3 a p\'e9lda, n\'e9gyzetes hiba a m\'e9rt\'e9k\
+\
+\'97> Ha megvan a hiba hangolni kell a s\'falyokat\
+\
+15.dia\
+\
+\'97> p\'e9lda, hogy milyen sok vari\'e1ci\'f3 van ha valami bruteforce hangol\'e1st haszn\'e1lunk\
+\
+17.dia\
+\
+\'97> Minden eddig \'f6sszefoglalva\
+\
+\'97> Nem konvex r\'e9szb\uc0\u337 l sok van az \'e1llapot t\'e9rben \
+\
+\'97> nem is tudjuk, hogy hol a glob\'e1lis minium csak lok\'e1lisat lehet \'97> modern m\'f3dszerek \'edgy is nagyon j\'f3k (szuboptim\'e1lis)\
+\
+\'97> deriv\'e1lgat\'e1ssal \'97> \'93adott s\'faly mennyire felel a hib\'e1\'e9rt\'94\
+\
+18.dia\
+\
+\'97> dy/ds \'97> a szigmoid deriv\'e1ltja\
+\
+20.dia\
+\
+\'97> batch gradient descent \'97> batch = tan\'edt\'f3 minta \'97> tan\'edt\'f3 mint\'e1nk\'e9nt sz\'e1molunk \'e9s ki\'e1tlagolunk\
+\
+21.dia\
+\
+\'97> m\'e9g egy r\'e9teggel h\'e1tr\'e9bb is megn\'e9zz\'fck a s\'falyok hat\'e1sait\
+\
+// adott p\'e9ld\'e1ban 4  mint\'e1nk van egy banch-ben\
+\
+\'97> l\'e9nyeg egyszerrre kell v\'e1ltoztatni az \'f6ssze s\'falyt, hogy kisebb legyen a hiba\
+\
+// learning rate \'97> tanul\'e1si ratatouille \'97> milyen m\'e9rt\'e9kben cs\'f6kkents\'fck a s\'falyokat a backprobagation alapj\'e1n\
+\
+\'97> egy epoch: az \'f6sszes minta egyszer v\'e9gig a h\'e1l\'f3n, backprobagation, s\'falyok \'e1ll\'edt\'e1sa\
+\
+23.dia\
+\
+// batch \'97> mint\'e1k \'f6sszes \'e1t, back prop, \'e1tlagol\'e1s, s\'falyok \'97> t\'fal nagy\
+\
+\'97> SGD \'97> mint\'e1kat egyenk\'e9nt (\'e1t, backprop, s\'falyok) \'97> t\'fal kicsi, de a gyakorlatban mini batch - eket alkotunk \'97> kiscsomagokban \'e1tlagolunk \'e9s \'fagy \'97> optim\'e1lis\
+	\'97> ez a gyakorlatban szok\'e1s \'97> hogy mekkkora ez a \'e9rt\'e9k minibatch \'e9rt\'e9k m\'e1r hiperparam\'e9ter \'97> tipikus \'e9rt\'e9kekei GPU 	       miatt\
+\
+\
+// http://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.28803&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false\
+\
+\
+\
+\
+\
+\
+\
+}
