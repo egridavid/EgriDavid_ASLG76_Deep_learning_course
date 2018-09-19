@@ -1,2 +1,4 @@
 # Hw_EgriDavid_ASLG76
-The collection of the homework for the deep learning curse
+Own work related to the deep learning course at TMIT
+* Mini homeworks
+* Main projekt
