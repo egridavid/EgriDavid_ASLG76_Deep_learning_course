@@ -1,0 +1,2086 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{main}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+\end{Verbatim}
+
+
+    \section{Pandas package használata}\label{pandas-package-hasznuxe1lata}
+
+    \section{CSV letöltése url ről}\label{csv-letuxf6ltuxe9se-url-rux151l}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{http://leszped.tmit.bme.hu/dl/movie\PYZus{}metadata.csv}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{r} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{allow\PYZus{}redirects}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{r}\PY{o}{.}\PY{n}{content}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} 1494688
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{movie\PYZus{}metadata.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    color      director\_name  num\_critic\_for\_reviews  duration  \textbackslash{}
+        0  Color      James Cameron                   723.0     178.0   
+        1  Color     Gore Verbinski                   302.0     169.0   
+        2  Color         Sam Mendes                   602.0     148.0   
+        3  Color  Christopher Nolan                   813.0     164.0   
+        4    NaN        Doug Walker                     NaN       NaN   
+        
+           director\_facebook\_likes  actor\_3\_facebook\_likes      actor\_2\_name  \textbackslash{}
+        0                      0.0                   855.0  Joel David Moore   
+        1                    563.0                  1000.0     Orlando Bloom   
+        2                      0.0                   161.0      Rory Kinnear   
+        3                  22000.0                 23000.0    Christian Bale   
+        4                    131.0                     NaN        Rob Walker   
+        
+           actor\_1\_facebook\_likes        gross                           genres  \textbackslash{}
+        0                  1000.0  760505847.0  Action|Adventure|Fantasy|Sci-Fi   
+        1                 40000.0  309404152.0         Action|Adventure|Fantasy   
+        2                 11000.0  200074175.0        Action|Adventure|Thriller   
+        3                 27000.0  448130642.0                  Action|Thriller   
+        4                   131.0          NaN                      Documentary   
+        
+                  {\ldots}          num\_user\_for\_reviews language  country  content\_rating  \textbackslash{}
+        0         {\ldots}                        3054.0  English      USA           PG-13   
+        1         {\ldots}                        1238.0  English      USA           PG-13   
+        2         {\ldots}                         994.0  English       UK           PG-13   
+        3         {\ldots}                        2701.0  English      USA           PG-13   
+        4         {\ldots}                           NaN      NaN      NaN             NaN   
+        
+                budget  title\_year actor\_2\_facebook\_likes imdb\_score  aspect\_ratio  \textbackslash{}
+        0  237000000.0      2009.0                  936.0        7.9          1.78   
+        1  300000000.0      2007.0                 5000.0        7.1          2.35   
+        2  245000000.0      2015.0                  393.0        6.8          2.35   
+        3  250000000.0      2012.0                23000.0        8.5          2.35   
+        4          NaN         NaN                   12.0        7.1           NaN   
+        
+          movie\_facebook\_likes  
+        0                33000  
+        1                    0  
+        2                85000  
+        3               164000  
+        4                    0  
+        
+        [5 rows x 28 columns]
+\end{Verbatim}
+            
+    \section{Igy állítod be h az összes oszlopot
+kiírja}\label{igy-uxe1lluxedtod-be-h-az-uxf6sszes-oszlopot-kiuxedrja}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}    color      director\_name  num\_critic\_for\_reviews  duration  \textbackslash{}
+        0  Color      James Cameron                   723.0     178.0   
+        1  Color     Gore Verbinski                   302.0     169.0   
+        2  Color         Sam Mendes                   602.0     148.0   
+        3  Color  Christopher Nolan                   813.0     164.0   
+        4    NaN        Doug Walker                     NaN       NaN   
+        
+           director\_facebook\_likes  actor\_3\_facebook\_likes      actor\_2\_name  \textbackslash{}
+        0                      0.0                   855.0  Joel David Moore   
+        1                    563.0                  1000.0     Orlando Bloom   
+        2                      0.0                   161.0      Rory Kinnear   
+        3                  22000.0                 23000.0    Christian Bale   
+        4                    131.0                     NaN        Rob Walker   
+        
+           actor\_1\_facebook\_likes        gross                           genres  \textbackslash{}
+        0                  1000.0  760505847.0  Action|Adventure|Fantasy|Sci-Fi   
+        1                 40000.0  309404152.0         Action|Adventure|Fantasy   
+        2                 11000.0  200074175.0        Action|Adventure|Thriller   
+        3                 27000.0  448130642.0                  Action|Thriller   
+        4                   131.0          NaN                      Documentary   
+        
+              actor\_1\_name                                        movie\_title  \textbackslash{}
+        0      CCH Pounder                                            Avatar    
+        1      Johnny Depp          Pirates of the Caribbean: At World's End    
+        2  Christoph Waltz                                           Spectre    
+        3        Tom Hardy                             The Dark Knight Rises    
+        4      Doug Walker  Star Wars: Episode VII - The Force Awakens    {\ldots}   
+        
+           num\_voted\_users  cast\_total\_facebook\_likes          actor\_3\_name  \textbackslash{}
+        0           886204                       4834             Wes Studi   
+        1           471220                      48350        Jack Davenport   
+        2           275868                      11700      Stephanie Sigman   
+        3          1144337                     106759  Joseph Gordon-Levitt   
+        4                8                        143                   NaN   
+        
+           facenumber\_in\_poster                                      plot\_keywords  \textbackslash{}
+        0                   0.0             avatar|future|marine|native|paraplegic   
+        1                   0.0  goddess|marriage ceremony|marriage proposal|pi{\ldots}   
+        2                   1.0                bomb|espionage|sequel|spy|terrorist   
+        3                   0.0  deception|imprisonment|lawlessness|police offi{\ldots}   
+        4                   0.0                                                NaN   
+        
+                                             movie\_imdb\_link  num\_user\_for\_reviews  \textbackslash{}
+        0  http://www.imdb.com/title/tt0499549/?ref\_=fn\_t{\ldots}                3054.0   
+        1  http://www.imdb.com/title/tt0449088/?ref\_=fn\_t{\ldots}                1238.0   
+        2  http://www.imdb.com/title/tt2379713/?ref\_=fn\_t{\ldots}                 994.0   
+        3  http://www.imdb.com/title/tt1345836/?ref\_=fn\_t{\ldots}                2701.0   
+        4  http://www.imdb.com/title/tt5289954/?ref\_=fn\_t{\ldots}                   NaN   
+        
+          language country content\_rating       budget  title\_year  \textbackslash{}
+        0  English     USA          PG-13  237000000.0      2009.0   
+        1  English     USA          PG-13  300000000.0      2007.0   
+        2  English      UK          PG-13  245000000.0      2015.0   
+        3  English     USA          PG-13  250000000.0      2012.0   
+        4      NaN     NaN            NaN          NaN         NaN   
+        
+           actor\_2\_facebook\_likes  imdb\_score  aspect\_ratio  movie\_facebook\_likes  
+        0                   936.0         7.9          1.78                 33000  
+        1                  5000.0         7.1          2.35                     0  
+        2                   393.0         6.8          2.35                 85000  
+        3                 23000.0         8.5          2.35                164000  
+        4                    12.0         7.1           NaN                     0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}       color     director\_name  num\_critic\_for\_reviews  duration  \textbackslash{}
+        5038  Color       Scott Smith                     1.0      87.0   
+        5039  Color               NaN                    43.0      43.0   
+        5040  Color  Benjamin Roberds                    13.0      76.0   
+        5041  Color       Daniel Hsia                    14.0     100.0   
+        5042  Color          Jon Gunn                    43.0      90.0   
+        
+              director\_facebook\_likes  actor\_3\_facebook\_likes      actor\_2\_name  \textbackslash{}
+        5038                      2.0                   318.0     Daphne Zuniga   
+        5039                      NaN                   319.0     Valorie Curry   
+        5040                      0.0                     0.0     Maxwell Moody   
+        5041                      0.0                   489.0     Daniel Henney   
+        5042                     16.0                    16.0  Brian Herzlinger   
+        
+              actor\_1\_facebook\_likes    gross                        genres  \textbackslash{}
+        5038                   637.0      NaN                  Comedy|Drama   
+        5039                   841.0      NaN  Crime|Drama|Mystery|Thriller   
+        5040                     0.0      NaN         Drama|Horror|Thriller   
+        5041                   946.0  10443.0          Comedy|Drama|Romance   
+        5042                    86.0  85222.0                   Documentary   
+        
+             actor\_1\_name                 movie\_title  num\_voted\_users  \textbackslash{}
+        5038  Eric Mabius    Signed Sealed Delivered               629   
+        5039  Natalie Zea  The Following                         73839   
+        5040  Eva Boehnke       A Plague So Pleasant                38   
+        5041    Alan Ruck           Shanghai Calling              1255   
+        5042  John August          My Date with Drew              4285   
+        
+              cast\_total\_facebook\_likes    actor\_3\_name  facenumber\_in\_poster  \textbackslash{}
+        5038                       2283    Crystal Lowe                   2.0   
+        5039                       1753   Sam Underwood                   1.0   
+        5040                          0  David Chandler                   0.0   
+        5041                       2386     Eliza Coupe                   5.0   
+        5042                        163        Jon Gunn                   0.0   
+        
+                                                  plot\_keywords  \textbackslash{}
+        5038             fraud|postal worker|prison|theft|trial   
+        5039       cult|fbi|hideout|prison escape|serial killer   
+        5040                                                NaN   
+        5041                                                NaN   
+        5042  actress name in title|crush|date|four word tit{\ldots}   
+        
+                                                movie\_imdb\_link  num\_user\_for\_reviews  \textbackslash{}
+        5038  http://www.imdb.com/title/tt3000844/?ref\_=fn\_t{\ldots}                   6.0   
+        5039  http://www.imdb.com/title/tt2071645/?ref\_=fn\_t{\ldots}                 359.0   
+        5040  http://www.imdb.com/title/tt2107644/?ref\_=fn\_t{\ldots}                   3.0   
+        5041  http://www.imdb.com/title/tt2070597/?ref\_=fn\_t{\ldots}                   9.0   
+        5042  http://www.imdb.com/title/tt0378407/?ref\_=fn\_t{\ldots}                  84.0   
+        
+             language country content\_rating  budget  title\_year  \textbackslash{}
+        5038  English  Canada            NaN     NaN      2013.0   
+        5039  English     USA          TV-14     NaN         NaN   
+        5040  English     USA            NaN  1400.0      2013.0   
+        5041  English     USA          PG-13     NaN      2012.0   
+        5042  English     USA             PG  1100.0      2004.0   
+        
+              actor\_2\_facebook\_likes  imdb\_score  aspect\_ratio  movie\_facebook\_likes  
+        5038                   470.0         7.7           NaN                    84  
+        5039                   593.0         7.5         16.00                 32000  
+        5040                     0.0         6.3           NaN                    16  
+        5041                   719.0         6.3          2.35                   660  
+        5042                    23.0         6.6          1.85                   456  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 5043
+\end{Verbatim}
+            
+    \section{Logikai érték az egyes elmeknél, hogy nulla -
+e}\label{logikai-uxe9rtuxe9k-az-egyes-elmeknuxe9l-hogy-nulla---e}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}       color  director\_name  num\_critic\_for\_reviews  duration  \textbackslash{}
+        0     False          False                   False     False   
+        1     False          False                   False     False   
+        2     False          False                   False     False   
+        3     False          False                   False     False   
+        4      True          False                    True      True   
+        5     False          False                   False     False   
+        6     False          False                   False     False   
+        7     False          False                   False     False   
+        8     False          False                   False     False   
+        9     False          False                   False     False   
+        10    False          False                   False     False   
+        11    False          False                   False     False   
+        12    False          False                   False     False   
+        13    False          False                   False     False   
+        14    False          False                   False     False   
+        15    False          False                   False     False   
+        16    False          False                   False     False   
+        17    False          False                   False     False   
+        18    False          False                   False     False   
+        19    False          False                   False     False   
+        20    False          False                   False     False   
+        21    False          False                   False     False   
+        22    False          False                   False     False   
+        23    False          False                   False     False   
+        24    False          False                   False     False   
+        25    False          False                   False     False   
+        26    False          False                   False     False   
+        27    False          False                   False     False   
+        28    False          False                   False     False   
+        29    False          False                   False     False   
+        {\ldots}     {\ldots}            {\ldots}                     {\ldots}       {\ldots}   
+        5013  False          False                   False     False   
+        5014  False          False                   False     False   
+        5015  False          False                   False     False   
+        5016  False          False                    True     False   
+        5017  False          False                   False     False   
+        5018  False          False                   False     False   
+        5019  False          False                   False     False   
+        5020   True          False                    True     False   
+        5021  False          False                   False     False   
+        5022  False          False                   False     False   
+        5023  False          False                   False     False   
+        5024  False          False                   False     False   
+        5025  False          False                   False     False   
+        5026  False          False                   False     False   
+        5027  False          False                   False     False   
+        5028  False          False                   False     False   
+        5029  False          False                   False     False   
+        5030  False          False                    True     False   
+        5031  False          False                   False     False   
+        5032  False          False                   False     False   
+        5033  False          False                   False     False   
+        5034  False          False                   False     False   
+        5035  False          False                   False     False   
+        5036  False          False                    True     False   
+        5037  False          False                   False     False   
+        5038  False          False                   False     False   
+        5039  False           True                   False     False   
+        5040  False          False                   False     False   
+        5041  False          False                   False     False   
+        5042  False          False                   False     False   
+        
+              director\_facebook\_likes  actor\_3\_facebook\_likes  actor\_2\_name  \textbackslash{}
+        0                       False                   False         False   
+        1                       False                   False         False   
+        2                       False                   False         False   
+        3                       False                   False         False   
+        4                       False                    True         False   
+        5                       False                   False         False   
+        6                       False                   False         False   
+        7                       False                   False         False   
+        8                       False                   False         False   
+        9                       False                   False         False   
+        10                      False                   False         False   
+        11                      False                   False         False   
+        12                      False                   False         False   
+        13                      False                   False         False   
+        14                      False                   False         False   
+        15                      False                   False         False   
+        16                      False                   False         False   
+        17                      False                   False         False   
+        18                      False                   False         False   
+        19                      False                   False         False   
+        20                      False                   False         False   
+        21                      False                   False         False   
+        22                      False                   False         False   
+        23                      False                   False         False   
+        24                      False                   False         False   
+        25                      False                   False         False   
+        26                      False                   False         False   
+        27                      False                   False         False   
+        28                      False                   False         False   
+        29                      False                   False         False   
+        {\ldots}                       {\ldots}                     {\ldots}           {\ldots}   
+        5013                    False                   False         False   
+        5014                    False                   False         False   
+        5015                    False                   False         False   
+        5016                    False                   False         False   
+        5017                    False                   False         False   
+        5018                    False                   False         False   
+        5019                    False                   False         False   
+        5020                    False                   False         False   
+        5021                    False                   False         False   
+        5022                    False                   False         False   
+        5023                    False                   False         False   
+        5024                    False                   False         False   
+        5025                    False                   False         False   
+        5026                    False                   False         False   
+        5027                    False                   False         False   
+        5028                    False                   False         False   
+        5029                    False                   False         False   
+        5030                    False                   False         False   
+        5031                    False                   False         False   
+        5032                    False                   False         False   
+        5033                    False                   False         False   
+        5034                    False                   False         False   
+        5035                    False                   False         False   
+        5036                    False                   False         False   
+        5037                    False                   False         False   
+        5038                    False                   False         False   
+        5039                     True                   False         False   
+        5040                    False                   False         False   
+        5041                    False                   False         False   
+        5042                    False                   False         False   
+        
+              actor\_1\_facebook\_likes  gross  genres  actor\_1\_name  movie\_title  \textbackslash{}
+        0                      False  False   False         False        False   
+        1                      False  False   False         False        False   
+        2                      False  False   False         False        False   
+        3                      False  False   False         False        False   
+        4                      False   True   False         False        False   
+        5                      False  False   False         False        False   
+        6                      False  False   False         False        False   
+        7                      False  False   False         False        False   
+        8                      False  False   False         False        False   
+        9                      False  False   False         False        False   
+        10                     False  False   False         False        False   
+        11                     False  False   False         False        False   
+        12                     False  False   False         False        False   
+        13                     False  False   False         False        False   
+        14                     False  False   False         False        False   
+        15                     False  False   False         False        False   
+        16                     False  False   False         False        False   
+        17                     False  False   False         False        False   
+        18                     False  False   False         False        False   
+        19                     False  False   False         False        False   
+        20                     False  False   False         False        False   
+        21                     False  False   False         False        False   
+        22                     False  False   False         False        False   
+        23                     False  False   False         False        False   
+        24                     False  False   False         False        False   
+        25                     False  False   False         False        False   
+        26                     False  False   False         False        False   
+        27                     False  False   False         False        False   
+        28                     False  False   False         False        False   
+        29                     False  False   False         False        False   
+        {\ldots}                      {\ldots}    {\ldots}     {\ldots}           {\ldots}          {\ldots}   
+        5013                   False   True   False         False        False   
+        5014                   False   True   False         False        False   
+        5015                   False  False   False         False        False   
+        5016                   False   True   False         False        False   
+        5017                   False   True   False         False        False   
+        5018                   False   True   False         False        False   
+        5019                   False   True   False         False        False   
+        5020                   False   True   False         False        False   
+        5021                   False  False   False         False        False   
+        5022                   False   True   False         False        False   
+        5023                   False  False   False         False        False   
+        5024                   False   True   False         False        False   
+        5025                   False  False   False         False        False   
+        5026                   False  False   False         False        False   
+        5027                   False  False   False         False        False   
+        5028                   False   True   False         False        False   
+        5029                   False  False   False         False        False   
+        5030                   False   True   False         False        False   
+        5031                   False   True   False         False        False   
+        5032                   False   True   False         False        False   
+        5033                   False  False   False         False        False   
+        5034                   False  False   False         False        False   
+        5035                   False  False   False         False        False   
+        5036                   False   True   False         False        False   
+        5037                   False  False   False         False        False   
+        5038                   False   True   False         False        False   
+        5039                   False   True   False         False        False   
+        5040                   False   True   False         False        False   
+        5041                   False  False   False         False        False   
+        5042                   False  False   False         False        False   
+        
+              num\_voted\_users  cast\_total\_facebook\_likes  actor\_3\_name  \textbackslash{}
+        0               False                      False         False   
+        1               False                      False         False   
+        2               False                      False         False   
+        3               False                      False         False   
+        4               False                      False          True   
+        5               False                      False         False   
+        6               False                      False         False   
+        7               False                      False         False   
+        8               False                      False         False   
+        9               False                      False         False   
+        10              False                      False         False   
+        11              False                      False         False   
+        12              False                      False         False   
+        13              False                      False         False   
+        14              False                      False         False   
+        15              False                      False         False   
+        16              False                      False         False   
+        17              False                      False         False   
+        18              False                      False         False   
+        19              False                      False         False   
+        20              False                      False         False   
+        21              False                      False         False   
+        22              False                      False         False   
+        23              False                      False         False   
+        24              False                      False         False   
+        25              False                      False         False   
+        26              False                      False         False   
+        27              False                      False         False   
+        28              False                      False         False   
+        29              False                      False         False   
+        {\ldots}               {\ldots}                        {\ldots}           {\ldots}   
+        5013            False                      False         False   
+        5014            False                      False         False   
+        5015            False                      False         False   
+        5016            False                      False         False   
+        5017            False                      False         False   
+        5018            False                      False         False   
+        5019            False                      False         False   
+        5020            False                      False         False   
+        5021            False                      False         False   
+        5022            False                      False         False   
+        5023            False                      False         False   
+        5024            False                      False         False   
+        5025            False                      False         False   
+        5026            False                      False         False   
+        5027            False                      False         False   
+        5028            False                      False         False   
+        5029            False                      False         False   
+        5030            False                      False         False   
+        5031            False                      False         False   
+        5032            False                      False         False   
+        5033            False                      False         False   
+        5034            False                      False         False   
+        5035            False                      False         False   
+        5036            False                      False         False   
+        5037            False                      False         False   
+        5038            False                      False         False   
+        5039            False                      False         False   
+        5040            False                      False         False   
+        5041            False                      False         False   
+        5042            False                      False         False   
+        
+              facenumber\_in\_poster  plot\_keywords  movie\_imdb\_link  \textbackslash{}
+        0                    False          False            False   
+        1                    False          False            False   
+        2                    False          False            False   
+        3                    False          False            False   
+        4                    False           True            False   
+        5                    False          False            False   
+        6                    False          False            False   
+        7                    False          False            False   
+        8                    False          False            False   
+        9                    False          False            False   
+        10                   False          False            False   
+        11                   False          False            False   
+        12                   False          False            False   
+        13                   False          False            False   
+        14                   False          False            False   
+        15                   False          False            False   
+        16                   False          False            False   
+        17                   False          False            False   
+        18                   False          False            False   
+        19                   False          False            False   
+        20                   False          False            False   
+        21                   False          False            False   
+        22                   False          False            False   
+        23                   False          False            False   
+        24                   False          False            False   
+        25                   False          False            False   
+        26                   False          False            False   
+        27                   False          False            False   
+        28                   False          False            False   
+        29                   False          False            False   
+        {\ldots}                    {\ldots}            {\ldots}              {\ldots}   
+        5013                 False          False            False   
+        5014                 False          False            False   
+        5015                 False          False            False   
+        5016                 False           True            False   
+        5017                 False          False            False   
+        5018                 False          False            False   
+        5019                 False          False            False   
+        5020                 False          False            False   
+        5021                 False          False            False   
+        5022                 False           True            False   
+        5023                 False           True            False   
+        5024                 False          False            False   
+        5025                 False          False            False   
+        5026                 False          False            False   
+        5027                 False          False            False   
+        5028                 False           True            False   
+        5029                 False          False            False   
+        5030                 False          False            False   
+        5031                  True          False            False   
+        5032                 False          False            False   
+        5033                 False          False            False   
+        5034                 False          False            False   
+        5035                 False          False            False   
+        5036                 False          False            False   
+        5037                 False          False            False   
+        5038                 False          False            False   
+        5039                 False          False            False   
+        5040                 False           True            False   
+        5041                 False           True            False   
+        5042                 False          False            False   
+        
+              num\_user\_for\_reviews  language  country  content\_rating  budget  \textbackslash{}
+        0                    False     False    False           False   False   
+        1                    False     False    False           False   False   
+        2                    False     False    False           False   False   
+        3                    False     False    False           False   False   
+        4                     True      True     True            True    True   
+        5                    False     False    False           False   False   
+        6                    False     False    False           False   False   
+        7                    False     False    False           False   False   
+        8                    False     False    False           False   False   
+        9                    False     False    False           False   False   
+        10                   False     False    False           False   False   
+        11                   False     False    False           False   False   
+        12                   False     False    False           False   False   
+        13                   False     False    False           False   False   
+        14                   False     False    False           False   False   
+        15                   False     False    False           False   False   
+        16                   False     False    False           False   False   
+        17                   False     False    False           False   False   
+        18                   False     False    False           False   False   
+        19                   False     False    False           False   False   
+        20                   False     False    False           False   False   
+        21                   False     False    False           False   False   
+        22                   False     False    False           False   False   
+        23                   False     False    False           False   False   
+        24                   False     False    False           False   False   
+        25                   False     False    False           False   False   
+        26                   False     False    False           False   False   
+        27                   False     False    False           False   False   
+        28                   False     False    False           False   False   
+        29                   False     False    False           False   False   
+        {\ldots}                    {\ldots}       {\ldots}      {\ldots}             {\ldots}     {\ldots}   
+        5013                 False     False    False            True   False   
+        5014                 False     False    False           False    True   
+        5015                 False     False    False           False   False   
+        5016                 False     False    False            True   False   
+        5017                 False     False    False            True   False   
+        5018                 False     False    False            True   False   
+        5019                 False     False    False           False    True   
+        5020                 False     False    False            True   False   
+        5021                 False     False    False           False   False   
+        5022                 False     False    False            True   False   
+        5023                 False     False    False            True   False   
+        5024                 False     False    False           False   False   
+        5025                 False     False    False           False   False   
+        5026                 False     False    False           False   False   
+        5027                 False     False    False           False   False   
+        5028                 False     False    False            True   False   
+        5029                 False     False    False            True   False   
+        5030                 False     False    False            True    True   
+        5031                 False     False    False            True   False   
+        5032                 False     False    False            True    True   
+        5033                 False     False    False           False   False   
+        5034                 False     False    False           False   False   
+        5035                 False     False    False           False   False   
+        5036                 False     False    False           False   False   
+        5037                 False     False    False           False   False   
+        5038                 False     False    False            True    True   
+        5039                 False     False    False           False    True   
+        5040                 False     False    False            True   False   
+        5041                 False     False    False           False    True   
+        5042                 False     False    False           False   False   
+        
+              title\_year  actor\_2\_facebook\_likes  imdb\_score  aspect\_ratio  \textbackslash{}
+        0          False                   False       False         False   
+        1          False                   False       False         False   
+        2          False                   False       False         False   
+        3          False                   False       False         False   
+        4           True                   False       False          True   
+        5          False                   False       False         False   
+        6          False                   False       False         False   
+        7          False                   False       False         False   
+        8          False                   False       False         False   
+        9          False                   False       False         False   
+        10         False                   False       False         False   
+        11         False                   False       False         False   
+        12         False                   False       False         False   
+        13         False                   False       False         False   
+        14         False                   False       False         False   
+        15         False                   False       False         False   
+        16         False                   False       False         False   
+        17         False                   False       False         False   
+        18         False                   False       False         False   
+        19         False                   False       False         False   
+        20         False                   False       False         False   
+        21         False                   False       False         False   
+        22         False                   False       False         False   
+        23         False                   False       False         False   
+        24         False                   False       False         False   
+        25         False                   False       False         False   
+        26         False                   False       False         False   
+        27         False                   False       False         False   
+        28         False                   False       False         False   
+        29         False                   False       False         False   
+        {\ldots}          {\ldots}                     {\ldots}         {\ldots}           {\ldots}   
+        5013       False                   False       False         False   
+        5014       False                   False       False         False   
+        5015       False                   False       False         False   
+        5016       False                   False       False          True   
+        5017       False                   False       False         False   
+        5018       False                   False       False         False   
+        5019       False                   False       False         False   
+        5020       False                   False       False          True   
+        5021       False                   False       False          True   
+        5022       False                   False       False          True   
+        5023       False                   False       False         False   
+        5024       False                   False       False         False   
+        5025       False                   False       False         False   
+        5026       False                   False       False         False   
+        5027       False                   False       False         False   
+        5028       False                   False       False         False   
+        5029       False                   False       False         False   
+        5030       False                   False       False          True   
+        5031       False                   False       False         False   
+        5032       False                   False       False          True   
+        5033       False                   False       False         False   
+        5034       False                   False       False          True   
+        5035       False                   False       False         False   
+        5036       False                   False       False          True   
+        5037       False                   False       False          True   
+        5038       False                   False       False          True   
+        5039        True                   False       False         False   
+        5040       False                   False       False          True   
+        5041       False                   False       False         False   
+        5042       False                   False       False         False   
+        
+              movie\_facebook\_likes  
+        0                    False  
+        1                    False  
+        2                    False  
+        3                    False  
+        4                    False  
+        5                    False  
+        6                    False  
+        7                    False  
+        8                    False  
+        9                    False  
+        10                   False  
+        11                   False  
+        12                   False  
+        13                   False  
+        14                   False  
+        15                   False  
+        16                   False  
+        17                   False  
+        18                   False  
+        19                   False  
+        20                   False  
+        21                   False  
+        22                   False  
+        23                   False  
+        24                   False  
+        25                   False  
+        26                   False  
+        27                   False  
+        28                   False  
+        29                   False  
+        {\ldots}                    {\ldots}  
+        5013                 False  
+        5014                 False  
+        5015                 False  
+        5016                 False  
+        5017                 False  
+        5018                 False  
+        5019                 False  
+        5020                 False  
+        5021                 False  
+        5022                 False  
+        5023                 False  
+        5024                 False  
+        5025                 False  
+        5026                 False  
+        5027                 False  
+        5028                 False  
+        5029                 False  
+        5030                 False  
+        5031                 False  
+        5032                 False  
+        5033                 False  
+        5034                 False  
+        5035                 False  
+        5036                 False  
+        5037                 False  
+        5038                 False  
+        5039                 False  
+        5040                 False  
+        5041                 False  
+        5042                 False  
+        
+        [5043 rows x 28 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ (sorok, amiben van NaN) / }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ (összes)}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1287 (sorok, amiben van NaN) / 5043 (összes)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 0                  Color
+         1                  Color
+         2                  Color
+         3                  Color
+         4                    NaN
+         5                  Color
+         6                  Color
+         7                  Color
+         8                  Color
+         9                  Color
+         10                 Color
+         11                 Color
+         12                 Color
+         13                 Color
+         14                 Color
+         15                 Color
+         16                 Color
+         17                 Color
+         18                 Color
+         19                 Color
+         20                 Color
+         21                 Color
+         22                 Color
+         23                 Color
+         24                 Color
+         25                 Color
+         26                 Color
+         27                 Color
+         28                 Color
+         29                 Color
+                       {\ldots}       
+         5013               Color
+         5014               Color
+         5015     Black and White
+         5016               Color
+         5017               Color
+         5018               Color
+         5019               Color
+         5020                 NaN
+         5021               Color
+         5022     Black and White
+         5023               Color
+         5024               Color
+         5025               Color
+         5026               Color
+         5027               Color
+         5028     Black and White
+         5029               Color
+         5030               Color
+         5031               Color
+         5032               Color
+         5033               Color
+         5034               Color
+         5035               Color
+         5036               Color
+         5037               Color
+         5038               Color
+         5039               Color
+         5040               Color
+         5041               Color
+         5042               Color
+         Name: color, Length: 5043, dtype: object
+\end{Verbatim}
+            
+    \section{Pyformat.info -\/-\textgreater{} print-es szintaxis
+miatt}\label{pyformat.info----print-es-szintaxis-miatt}
+
+    \section{Törlése azoknak a soroknak amiben van NaN
+érték}\label{tuxf6rluxe9se-azoknak-a-soroknak-amiben-van-nan-uxe9rtuxe9k}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{o}{\PYZti{}}\PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 3756
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}    color      director\_name  num\_critic\_for\_reviews  duration  \textbackslash{}
+         0  Color      James Cameron                   723.0     178.0   
+         1  Color     Gore Verbinski                   302.0     169.0   
+         2  Color         Sam Mendes                   602.0     148.0   
+         3  Color  Christopher Nolan                   813.0     164.0   
+         5  Color     Andrew Stanton                   462.0     132.0   
+         
+            director\_facebook\_likes  actor\_3\_facebook\_likes      actor\_2\_name  \textbackslash{}
+         0                      0.0                   855.0  Joel David Moore   
+         1                    563.0                  1000.0     Orlando Bloom   
+         2                      0.0                   161.0      Rory Kinnear   
+         3                  22000.0                 23000.0    Christian Bale   
+         5                    475.0                   530.0   Samantha Morton   
+         
+            actor\_1\_facebook\_likes        gross                           genres  \textbackslash{}
+         0                  1000.0  760505847.0  Action|Adventure|Fantasy|Sci-Fi   
+         1                 40000.0  309404152.0         Action|Adventure|Fantasy   
+         2                 11000.0  200074175.0        Action|Adventure|Thriller   
+         3                 27000.0  448130642.0                  Action|Thriller   
+         5                   640.0   73058679.0          Action|Adventure|Sci-Fi   
+         
+               actor\_1\_name                                movie\_title  \textbackslash{}
+         0      CCH Pounder                                    Avatar    
+         1      Johnny Depp  Pirates of the Caribbean: At World's End    
+         2  Christoph Waltz                                   Spectre    
+         3        Tom Hardy                     The Dark Knight Rises    
+         5     Daryl Sabara                               John Carter    
+         
+            num\_voted\_users  cast\_total\_facebook\_likes          actor\_3\_name  \textbackslash{}
+         0           886204                       4834             Wes Studi   
+         1           471220                      48350        Jack Davenport   
+         2           275868                      11700      Stephanie Sigman   
+         3          1144337                     106759  Joseph Gordon-Levitt   
+         5           212204                       1873          Polly Walker   
+         
+            facenumber\_in\_poster                                      plot\_keywords  \textbackslash{}
+         0                   0.0             avatar|future|marine|native|paraplegic   
+         1                   0.0  goddess|marriage ceremony|marriage proposal|pi{\ldots}   
+         2                   1.0                bomb|espionage|sequel|spy|terrorist   
+         3                   0.0  deception|imprisonment|lawlessness|police offi{\ldots}   
+         5                   1.0  alien|american civil war|male nipple|mars|prin{\ldots}   
+         
+                                              movie\_imdb\_link  num\_user\_for\_reviews  \textbackslash{}
+         0  http://www.imdb.com/title/tt0499549/?ref\_=fn\_t{\ldots}                3054.0   
+         1  http://www.imdb.com/title/tt0449088/?ref\_=fn\_t{\ldots}                1238.0   
+         2  http://www.imdb.com/title/tt2379713/?ref\_=fn\_t{\ldots}                 994.0   
+         3  http://www.imdb.com/title/tt1345836/?ref\_=fn\_t{\ldots}                2701.0   
+         5  http://www.imdb.com/title/tt0401729/?ref\_=fn\_t{\ldots}                 738.0   
+         
+           language country content\_rating       budget  title\_year  \textbackslash{}
+         0  English     USA          PG-13  237000000.0      2009.0   
+         1  English     USA          PG-13  300000000.0      2007.0   
+         2  English      UK          PG-13  245000000.0      2015.0   
+         3  English     USA          PG-13  250000000.0      2012.0   
+         5  English     USA          PG-13  263700000.0      2012.0   
+         
+            actor\_2\_facebook\_likes  imdb\_score  aspect\_ratio  movie\_facebook\_likes  
+         0                   936.0         7.9          1.78                 33000  
+         1                  5000.0         7.1          2.35                     0  
+         2                   393.0         6.8          2.35                 85000  
+         3                 23000.0         8.5          2.35                164000  
+         5                   632.0         6.6          2.35                 24000  
+\end{Verbatim}
+            
+    \section{Milyen kategorikus változók lehetnek: color, director\_name,
+actor\_1\_name, actor\_2\_name, actor\_3\_name, language, country,
+content\_rating}\label{milyen-kategorikus-vuxe1ltozuxf3k-lehetnek-color-director_name-actor_1_name-actor_2_name-actor_3_name-language-country-content_rating}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{categorical\PYZus{}features} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{director\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{actor\PYZus{}1\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{actor\PYZus{}2\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{actor\PYZus{}3\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{language}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{content\PYZus{}rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{n\PYZus{}items} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Amelyik kategórinál az összes elem kevesebb mint 2\% tartozik
+ott OTHER kategóriába raktuk
+őket}\label{amelyik-kateguxf3rinuxe1l-az-uxf6sszes-elem-kevesebb-mint-2-tartozik-ott-other-kateguxf3riuxe1ba-raktuk-ux151ket}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{for} \PY{n}{feat} \PY{o+ow}{in} \PY{n}{categorical\PYZus{}features}\PY{p}{:}
+             
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ feldolgozása. Egyedi mezők száma: }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{feat}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{feat}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{df}\PY{p}{[}\PY{n}{feat}\PY{p}{]}\PY{o}{.}\PY{n}{nunique}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{50}\PY{p}{:}
+         
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{feat}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{n}{feat}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Itt rakjuk át a OTHER kategóriába a cuccokat}
+                 \PY{k}{for} \PY{n}{feat\PYZus{}value} \PY{o+ow}{in} \PY{n}{df}\PY{p}{[}\PY{n}{feat}\PY{p}{]}\PY{p}{:}
+                     \PY{k}{if} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{n}{feat}\PY{p}{]} \PY{o}{==} \PY{n}{feat\PYZus{}value}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n}{n\PYZus{}items} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.02}\PY{p}{)}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A }\PY{l+s+si}{\PYZpc{}s}\PY{l+s+s2}{ kategória hozzáadása az OTHER kategoriához}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{feat\PYZus{}value}\PY{p}{)}
+                         \PY{n}{df}\PY{p}{[}\PY{n}{feat}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{feat}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{OTHER}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{n}{feat\PYZus{}value} \PY{k}{else} \PY{n}{x}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+A color feldolgozása. Egyedi mezők száma: 2.
+['Color' ' Black and White']
+color
+ Black and White     124
+Color               3632
+Name: director\_name, dtype: int64
+A director\_name feldolgozása. Egyedi mezők száma: 1659.
+A actor\_1\_name feldolgozása. Egyedi mezők száma: 1428.
+A actor\_2\_name feldolgozása. Egyedi mezők száma: 2188.
+A actor\_3\_name feldolgozása. Egyedi mezők száma: 2587.
+A language feldolgozása. Egyedi mezők száma: 34.
+['English' 'Mandarin' 'Aboriginal' 'Spanish' 'French' 'Filipino' 'Maya'
+ 'Kazakh' 'Cantonese' 'Japanese' 'Aramaic' 'Italian' 'Dutch' 'Dari'
+ 'German' 'Mongolian' 'Thai' 'Bosnian' 'Korean' 'Hungarian' 'Hindi'
+ 'Danish' 'Portuguese' 'Norwegian' 'Czech' 'Russian' 'None' 'Zulu'
+ 'Hebrew' 'Arabic' 'Vietnamese' 'Indonesian' 'Romanian' 'Persian']
+language
+Aboriginal       2
+Arabic           1
+Aramaic          1
+Bosnian          1
+Cantonese        7
+Czech            1
+Danish           3
+Dari             2
+Dutch            3
+English       3598
+Filipino         1
+French          34
+German          10
+Hebrew           1
+Hindi            5
+Hungarian        1
+Indonesian       2
+Italian          7
+Japanese        10
+Kazakh           1
+Korean           5
+Mandarin        15
+Maya             1
+Mongolian        1
+None             1
+Norwegian        4
+Persian          3
+Portuguese       5
+Romanian         1
+Russian          1
+Spanish         23
+Thai             3
+Vietnamese       1
+Zulu             1
+Name: color, dtype: int64
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Aboriginal kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Filipino kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Maya kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Kazakh kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Cantonese kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Aramaic kategória hozzáadása az OTHER kategoriához
+A Italian kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Dutch kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Cantonese kategória hozzáadása az OTHER kategoriához
+A Dari kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A Mongolian kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Thai kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Bosnian kategória hozzáadása az OTHER kategoriához
+A Korean kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Korean kategória hozzáadása az OTHER kategoriához
+A Italian kategória hozzáadása az OTHER kategoriához
+A Cantonese kategória hozzáadása az OTHER kategoriához
+A Hungarian kategória hozzáadása az OTHER kategoriához
+A Mandarin kategória hozzáadása az OTHER kategoriához
+A Hindi kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Italian kategória hozzáadása az OTHER kategoriához
+A Cantonese kategória hozzáadása az OTHER kategoriához
+A Korean kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Hindi kategória hozzáadása az OTHER kategoriához
+A Thai kategória hozzáadása az OTHER kategoriához
+A Danish kategória hozzáadása az OTHER kategoriához
+A Hindi kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A Cantonese kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Aboriginal kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Italian kategória hozzáadása az OTHER kategoriához
+A Portuguese kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Dutch kategória hozzáadása az OTHER kategoriához
+A Thai kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A Norwegian kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Czech kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Dutch kategória hozzáadása az OTHER kategoriához
+A Korean kategória hozzáadása az OTHER kategoriához
+A Cantonese kategória hozzáadása az OTHER kategoriához
+A Russian kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A None kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Portuguese kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Norwegian kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Portuguese kategória hozzáadása az OTHER kategoriához
+A Danish kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Zulu kategória hozzáadása az OTHER kategoriához
+A Korean kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A Portuguese kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Norwegian kategória hozzáadása az OTHER kategoriához
+A Cantonese kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Hebrew kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A German kategória hozzáadása az OTHER kategoriához
+A Hindi kategória hozzáadása az OTHER kategoriához
+A Arabic kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Danish kategória hozzáadása az OTHER kategoriához
+A Vietnamese kategória hozzáadása az OTHER kategoriához
+A Hindi kategória hozzáadása az OTHER kategoriához
+A Italian kategória hozzáadása az OTHER kategoriához
+A Portuguese kategória hozzáadása az OTHER kategoriához
+A Indonesian kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A Indonesian kategória hozzáadása az OTHER kategoriához
+A Romanian kategória hozzáadása az OTHER kategoriához
+A Persian kategória hozzáadása az OTHER kategoriához
+A Norwegian kategória hozzáadása az OTHER kategoriához
+A Dari kategória hozzáadása az OTHER kategoriához
+A Japanese kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A Italian kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Italian kategória hozzáadása az OTHER kategoriához
+A Persian kategória hozzáadása az OTHER kategoriához
+A French kategória hozzáadása az OTHER kategoriához
+A Persian kategória hozzáadása az OTHER kategoriához
+A Spanish kategória hozzáadása az OTHER kategoriához
+A country feldolgozása. Egyedi mezők száma: 45.
+['USA' 'UK' 'New Zealand' 'Canada' 'Australia' 'Germany' 'China'
+ 'New Line' 'France' 'Japan' 'Spain' 'Hong Kong' 'Czech Republic' 'Peru'
+ 'South Korea' 'Aruba' 'Denmark' 'Ireland' 'South Africa' 'Italy'
+ 'Romania' 'Chile' 'Netherlands' 'Hungary' 'Russia' 'Belgium' 'Greece'
+ 'Taiwan' 'Official site' 'Thailand' 'Iran' 'West Germany' 'Georgia'
+ 'India' 'Mexico' 'Brazil' 'Finland' 'Norway' 'Iceland' 'Argentina'
+ 'Colombia' 'Poland' 'Israel' 'Indonesia' 'Afghanistan']
+country
+Afghanistan          1
+Argentina            3
+Aruba                1
+Australia           39
+Belgium              1
+Brazil               5
+Canada              59
+Chile                1
+China               13
+Colombia             1
+Czech Republic       3
+Denmark              8
+Finland              1
+France             101
+Georgia              1
+Germany             80
+Greece               1
+Hong Kong           13
+Hungary              2
+Iceland              1
+India                5
+Indonesia            1
+Iran                 4
+Ireland              7
+Israel               1
+Italy               11
+Japan               15
+Mexico               6
+Netherlands          3
+New Line             1
+New Zealand         11
+Norway               4
+Official site        1
+Peru                 1
+Poland               1
+Romania              2
+Russia               3
+South Africa         3
+South Korea          8
+Spain               21
+Taiwan               2
+Thailand             4
+UK                 318
+USA               2987
+West Germany         1
+Name: color, dtype: int64
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A New Line kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Czech Republic kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Peru kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A South Korea kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Aruba kategória hozzáadása az OTHER kategoriához
+A Denmark kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Ireland kategória hozzáadása az OTHER kategoriához
+A South Korea kategória hozzáadása az OTHER kategoriához
+A South Africa kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A Romania kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A South Africa kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Chile kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A Ireland kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Netherlands kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Hungary kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Russia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A Belgium kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Russia kategória hozzáadása az OTHER kategoriához
+A Greece kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Ireland kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Taiwan kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Official site kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Taiwan kategória hozzáadása az OTHER kategoriához
+A Thailand kategória hozzáadása az OTHER kategoriához
+A Denmark kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Iran kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A South Korea kategória hozzáadása az OTHER kategoriához
+A Ireland kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Denmark kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A South Korea kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A West Germany kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A South Korea kategória hozzáadása az OTHER kategoriához
+A Czech Republic kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Ireland kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Hungary kategória hozzáadása az OTHER kategoriához
+A China kategória hozzáadása az OTHER kategoriához
+A Georgia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A India kategória hozzáadása az OTHER kategoriához
+A Mexico kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A South Korea kategória hozzáadása az OTHER kategoriához
+A Denmark kategória hozzáadása az OTHER kategoriához
+A India kategória hozzáadása az OTHER kategoriához
+A Thailand kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Denmark kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Thailand kategória hozzáadása az OTHER kategoriához
+A India kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Brazil kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Ireland kategória hozzáadása az OTHER kategoriához
+A Netherlands kategória hozzáadása az OTHER kategoriához
+A Thailand kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Finland kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Norway kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Mexico kategória hozzáadása az OTHER kategoriához
+A Mexico kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Czech Republic kategória hozzáadása az OTHER kategoriához
+A Denmark kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Netherlands kategória hozzáadása az OTHER kategoriához
+A South Korea kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A Russia kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Brazil kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Iceland kategória hozzáadása az OTHER kategoriához
+A Argentina kategória hozzáadása az OTHER kategoriához
+A Mexico kategória hozzáadása az OTHER kategoriához
+A Norway kategória hozzáadása az OTHER kategoriához
+A Brazil kategória hozzáadása az OTHER kategoriához
+A Denmark kategória hozzáadása az OTHER kategoriához
+A Colombia kategória hozzáadása az OTHER kategoriához
+A South Korea kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Brazil kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Poland kategória hozzáadása az OTHER kategoriához
+A Norway kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Hong Kong kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Mexico kategória hozzáadása az OTHER kategoriához
+A Israel kategória hozzáadása az OTHER kategoriához
+A South Africa kategória hozzáadása az OTHER kategoriához
+A Spain kategória hozzáadása az OTHER kategoriához
+A Mexico kategória hozzáadása az OTHER kategoriához
+A India kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Argentina kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Argentina kategória hozzáadása az OTHER kategoriához
+A Denmark kategória hozzáadása az OTHER kategoriához
+A India kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Brazil kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Indonesia kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A Romania kategória hozzáadása az OTHER kategoriához
+A Iran kategória hozzáadása az OTHER kategoriához
+A Norway kategória hozzáadása az OTHER kategoriához
+A New Zealand kategória hozzáadása az OTHER kategoriához
+A Australia kategória hozzáadása az OTHER kategoriához
+A Afghanistan kategória hozzáadása az OTHER kategoriához
+A Japan kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Italy kategória hozzáadása az OTHER kategoriához
+A Iran kategória hozzáadása az OTHER kategoriához
+A Ireland kategória hozzáadása az OTHER kategoriához
+A Canada kategória hozzáadása az OTHER kategoriához
+A Iran kategória hozzáadása az OTHER kategoriához
+A content\_rating feldolgozása. Egyedi mezők száma: 12.
+['PG-13' 'PG' 'G' 'R' 'Approved' 'NC-17' 'X' 'Not Rated' 'Unrated' 'M'
+ 'GP' 'Passed']
+content\_rating
+Approved       17
+G              87
+GP              1
+M               2
+NC-17           6
+Not Rated      34
+PG            566
+PG-13        1308
+Passed          3
+R            1700
+Unrated        22
+X              10
+Name: color, dtype: int64
+A Approved kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A NC-17 kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A M kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A GP kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A NC-17 kategória hozzáadása az OTHER kategoriához
+A M kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Passed kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Passed kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A NC-17 kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A NC-17 kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A NC-17 kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A X kategória hozzáadása az OTHER kategoriához
+A Passed kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Approved kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+A Unrated kategória hozzáadása az OTHER kategoriához
+A NC-17 kategória hozzáadása az OTHER kategoriához
+A Not Rated kategória hozzáadása az OTHER kategoriához
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{color}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Numpy package használata}\label{numpy-package-hasznuxe1lata}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{alma} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{korte} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} lista kell az array\PYZhy{}be }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n+nb}{type}\PY{p}{(}\PY{n}{korte}\PY{p}{)}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{alma}\PY{p}{)} \PY{c+c1}{\PYZsh{} más a válto typusa is}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} (numpy.ndarray, list)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{alma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{dtype} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{alma} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} lefoglalása a memóriának}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{alma} \PY{c+c1}{\PYZsh{} nem nullákkal van inicializálva}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} array([[2.9615e-319, 7.5142e-319, 8.7400e-321],
+                [1.0716e-320, 0.0000e+000, 0.0000e+000]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{nullak} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{nullak}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} array([[0.],
+                [0.]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{egyesek} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{egyesek}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} array([1., 1., 1., 1.])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{diagonal\PYZus{}matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{diagonal\PYZus{}matrix}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} array([[1., 0., 0., {\ldots}, 0., 0., 0.],
+                [0., 1., 0., {\ldots}, 0., 0., 0.],
+                [0., 0., 1., {\ldots}, 0., 0., 0.],
+                {\ldots},
+                [0., 0., 0., {\ldots}, 1., 0., 0.],
+                [0., 0., 0., {\ldots}, 0., 1., 0.],
+                [0., 0., 0., {\ldots}, 0., 0., 1.]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{]}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{b}\PY{p}{,} \PY{n}{a}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} (array([0, 1, 2, 3]), array([20, 30, 40, 50]))
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{a}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} array([-20, -29, -38, -47])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{b}\PY{o}{\PYZlt{}}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} array([ True,  True, False, False])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{n}{B} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{B}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[1 2]
+ [3 4]]
+[[1 2]
+ [6 7]]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{A}\PY{o}{*}\PY{n}{B} \PY{c+c1}{\PYZsh{} element wise operation}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} array([[ 1,  4],
+                [18, 28]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{A}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{B}\PY{p}{)} \PY{c+c1}{\PYZsh{} vectorial product}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} array([[13, 16],
+                [27, 34]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{33}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} array([[0.24851013, 0.44997542, 0.4109408 ],
+                [0.26029969, 0.87039569, 0.18503993],
+                [0.01966143, 0.95325203, 0.6804508 ]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{A}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} 4
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
